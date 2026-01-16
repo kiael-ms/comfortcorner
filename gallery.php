@@ -41,7 +41,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="judul" class="form-label">Deskripsi</label>
-                            <input type="text" class="form-control" name="judul" placeholder="Tuliskan Judul Artikel" required>
+                            <input type="text" class="form-control" name="judul" placeholder="Tuliskan Judul Gallery" required>
                         </div>
                         <div class="mb-3">
                             <label for="gambar" class="form-label">Gambar</label>
@@ -130,7 +130,7 @@ if (isset($_POST['simpan'])) {
                 unlink("img/" . $_POST['gambar_lama']);
             }
     
-            $stmt = $conn->prepare("UPDATE articel 
+            $stmt = $conn->prepare("UPDATE gallery 
                                     SET 
                                     judul =?,
                                     gambar = ?,
@@ -138,26 +138,26 @@ if (isset($_POST['simpan'])) {
                                     username = ?
                                     WHERE id = ?");
     
-            $stmt->bind_param("sssssi", $judul, $gambar, $tanggal, $username, $id);
+            $stmt->bind_param("ssssi", $judul, $gambar, $tanggal, $username, $id);
             $simpan = $stmt->execute();
         } else {
                 //jika tidak ada id, lakukan insert data baru
             $stmt = $conn->prepare("INSERT INTO gallery (judul,gambar,tanggal,username)
-                                    VALUES (?,?,?,?,?)");
+                                    VALUES (?,?,?,?)");
     
-            $stmt->bind_param("sssss", $judul, $gambar, $tanggal, $username);
+            $stmt->bind_param("ssss", $judul, $gambar, $tanggal, $username);
             $simpan = $stmt->execute();
         }
 
     if ($simpan) {
         echo "<script>
             alert('Simpan data sukses');
-            document.location='admin.php?page=article';
+            document.location='admin.php?page=gallery';
         </script>";
     } else {
         echo "<script>
             alert('Simpan data gagal');
-            document.location='admin.php?page=article';
+            document.location='admin.php?page=gallery';
         </script>";
     }
 

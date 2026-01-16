@@ -4,12 +4,12 @@
     $keyword = $_POST['keyword'];
     
     $sql = "SELECT * FROM gallery
-            WHERE judul LIKE ? OR tanggal LIKE ? OR username LIKE ?
+            WHERE judul LIKE ? OR gambar LIKE ? OR tanggal LIKE ? OR username LIKE ?
             ORDER BY tanggal DESC";
     
     $stmt = $conn->prepare($sql);
     $search = "%" . $keyword . "%";
-    $stmt->bind_param("sss", $search, $search, $search);
+    $stmt->bind_param("ssss", $search, $search, $search, $search);
     $stmt->execute();
     
     $hasil = $stmt->get_result();
