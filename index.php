@@ -101,38 +101,41 @@ include "koneksi.php";
     <!-- articel end -->
 
     <!-- gallery begin -->
-     <section id="gallery" class="text-center p-5 bg-primary-subtle">
-        <div class="container">
-            <h1 class="fw-bold display-4 pb-3">Gallery</h1>
-            <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="img/galery.jpg" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="img/galery1.jpg" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="img/galery2.jpg" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="img/galery3.jpg" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="img/galery4.jpg" class="d-block w-100" alt="...">
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
+    <section id="gallery" class="p-5 bg-primary-subtle">
+    <div class="container">
+        <h1 class="fw-bold display-4 pb-3 text-center">Gallery</h1>
+        <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <?php
+                $sql = "SELECT * FROM gallery ORDER BY tanggal DESC";
+                $hasil = $conn->query($sql);
+                $active = true;
+
+                while ($row = $hasil->fetch_assoc()) {
+                ?>
+                    <div class="carousel-item <?= $active ? 'active' : '' ?>">
+                        <img 
+                            src="img/<?= $row['gambar']; ?>" 
+                            class="d-block w-100 rounded" 
+                            alt="gallery image">
+                    </div>
+                <?php
+                    $active = false;
+                }
+                ?>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
-     </section>
+    </div>
+</section>
+
     <!-- gallery end -->
     
     <!-- footer begin -->
