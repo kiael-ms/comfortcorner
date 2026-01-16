@@ -9,7 +9,7 @@ $jumlah_article = $hasil1->num_rows;
 $sql1 = "SELECT * FROM gallery ORDER BY tanggal DESC";
 $hasil1 = $conn->query($sql1);
 
-//menghitung jumlah baris data article
+//menghitung jumlah baris data gallery
 $jumlah_gallery = $hasil1->num_rows; 
 
 ?>
